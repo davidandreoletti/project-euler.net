@@ -18,7 +18,7 @@ None.
 DOCUMENTATION
 =============
 
-Files are fully documented.
+Source files are fully documented. Read main.tex in each problem set for futher details about some solutions.
 Every problem is identified by their number. Eg: id1 is "Problem ID 1".
 
 SOURCE

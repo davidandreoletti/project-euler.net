@@ -1,0 +1,161 @@
+\documentclass[12pt]{report}
+   \usepackage[fleqn]{amsmath}
+   \usepackage{hyperref}       
+   \begin{document}
+       \title{Problem ID 2}
+       \author{David Andreoletti}
+       \date{August 2013} 
+       \maketitle       
+O(1) solution :)\\ \\
+\href{http://en.wikipedia.org/wiki/Fibonacci_number}{Fibonacci Sequence} is 
+\begin{equation} 
+F_n = F_{n-1} + F_{n-2} 
+\end{equation} 
+1)\\ \\
+First terms in the sequence are:
+\begin{align*}
+F_n    &= 0, 1, 2, 3, 5, 8, 13, 21, 34, 55 ... \\
+n     &= 0, 1, 2, 3, 4, 5, 6,  7,  8,  9  ... \\
+\end{align*}
+\begin{align*}
+G_m    &= 0, 2, 8, 34 ... \\
+n     &=  0,  2,  5,  8  ... \\
+m     &=  0,  1,  2,  3  ... \\
+\end{align*}
+\(G_m\) looks like a sequence of even Fibonaci terms. Is \(G_m = A*G_{m-1} + B*G_{m-2} = 2k\)
+ with \(m \geq 2\) and \(n \geq 3\) ?  \\ \\
+2) \\ \\
+Expressing Gm with Fn terms 
+\begin{equation} 
+\begin{aligned}
+ G_m &= C*G_{m-1} + D*G_{m-2} \\
+ F_{n+6} &= C*F_{n+3} + D*F_n \\
+ F_n &= (F_{n+6} - C*F_{n+3}) / D \\
+\end{aligned}
+\end{equation} 
+We know: \(F_n = F_{n-1} + F_{n-2}\) 
+\begin{equation} 
+ (F_{n+6} - C*F_{n+3}) / D = F_{n-1} + F_{n-2}
+\end{equation} 
+We know: \(F_0 = 0, F_1 = 1\) \\ \\
+Solve (A) for \(n=5:\) 
+\begin{equation} 
+\begin{aligned} \label{eq:a1}
+  (F_{11} - C*F_8) / D &= F_4 + F_3 \\
+  (89 - C*21) / D &= 3 + 2  \\
+  89 - 21C - 5D &= 0        \\
+\end{aligned}
+\end{equation} 
+Solve (A) for \(n=8\): 
+\begin{equation} \label{eq:a2}
+\begin{aligned}
+  (F_{14} - C*F_11) / D &= F_7 + F_6 \\
+  377 - 89C - 21D &= 0         \\
+\end{aligned}
+\end{equation} 
+Solve \href{https://en.wikipedia.org/wiki/System_of_linear_equations}{System of linear equations}  \eqref{eq:a1} \eqref{eq:a2} to find C and D. \\ \\
+\(C = 4, D = 1\) \\ \\
+So: \\
+\begin{equation} 
+\begin{aligned} \label{eq:a3}
+ F_{n+6} &= 4*F_{n+3} + F_n     \\
+ F_{n+6} &=  0*F_{n+5} + 0*F_{n+4} + 4*F_{n+3} + 0*F_{n+2} + 0*F_{n+1} + F_n \\
+ G_m &= 4*G_{m-1} + 1*G_{m-2} \\
+\end{aligned}
+\end{equation} 
+\eqref{eq:a3} is a \href{http://en.wikipedia.org/wiki/Recurrence_relation#Linear_homogeneous_recurrence_relations_with_constant_coefficients}{Linear homogeneous recurrence relations with constant coefficients} of order d=2 (LRS). LRS yields characteristic polynomial of the form: 
+\begin{equation} 
+   p(t) = t^d - c_1t^d-1 - c_2t^d-2 + ... + c_d
+\end{equation} 
+ Hence \eqref{eq:a3} 's characteristic polynomial is:
+\begin{equation} 
+   p(t) = t^2 - 4t - 1
+\end{equation} 
+Solve p(t) = 0 
+\begin{equation}
+\begin{aligned} \label{eq:a4}
+   0 &= t^2 - 4t - 1 = p(t) \\
+     &= (t-2)^2 -4t - 5           \text{since (a-b)(a-b) = a*a + b*b - 2ab} \\
+    (t-2) &= \pm \sqrt{5} \\
+    t &= \pm \sqrt{5} + 2 \\
+\end{aligned}
+\end{equation}  
+So \eqref{eq:a4} has solutions: 
+\begin{equation}  
+\begin{aligned}
+   r_1 &= \sqrt{5} + 2 \\
+   r_2 &= -\sqrt{5} + 2  \\
+\end{aligned}
+\end{equation} 
+\(r_0, r_1\) are all distincts.
+Hence solution to LRS takes the following form:
+\begin{equation} \label{eq:a5}
+ a_n = a(r_1)^n + b(r_2)^n 
+\end{equation} 
+Solve \eqref{eq:a5}  for \(n=0\)
+\begin{equation} 
+\begin{aligned}
+   a_0 &= a(r_1)^0 + b(r_2)^0  \\
+   a_0 &= a + b  \\
+   a &= a_0 - b   \\
+   a &= G_0 - b \text{ since } a_0 = G_0 = 0 \\
+   a &= -b
+\end{aligned}
+\end{equation} 
+Solve \eqref{eq:a5}  for \(n=1\)
+\begin{equation} 
+\begin{aligned}
+   a_1 &= a(r_1)^1 + b(r_2)^1  \\
+   a_1 &= a(r_1) + b(r_2)  \\
+   a_1 &= a(r_1) - a(r_2)   \\
+   G_1 &= a ((r_1) - (r_2)) \text{ since } G_1 = a_1 = 2 \\
+   2 &= a (2\sqrt{5} )\\
+   a &= \frac{1}{\sqrt{5}}\\
+\end{aligned}
+\end{equation}     
+So \eqref{eq:a5} has solutions:     
+\(a = \frac{1}{\sqrt{5}}, b = -\frac{1}{\sqrt{5}}   \\
+\) \\
+So we have:
+\begin{equation} \label{eq:a6}
+ a_n = \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^n + -\frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^n 
+\end{equation} 
+Find biggest \(n\) such that \(a_n \leq 4000000 \) 
+\begin{equation}
+\begin{aligned} \label{eq:a7}
+\frac{1}{\sqrt{5}}(2+\sqrt{5})^n - \frac{1}{\sqrt{5}}(2-\sqrt{5})^n &\leq 4000000 \\
+(2+\sqrt{5})^n - (2 - \sqrt{5})^n &\leq 4000000\sqrt{5} \\
+(2+\sqrt{5})^n  &\leq 4000000\sqrt{5} + (2 - \sqrt{5})^n\\
+\lfloor (2+\sqrt{5})^n \rfloor &\leq \lfloor 4000000\sqrt{5} + (2 - \sqrt{5})^n \rfloor \\
+\lfloor (2+\sqrt{5})^n \rfloor &\leq  4000000\sqrt{5} + \lfloor (2 - \sqrt{5})^n \rfloor \\
+\lfloor (2+\sqrt{5})^n \rfloor &\leq  4000000\sqrt{5} \text{ since }  \lfloor (2 - \sqrt{5})^n \rfloor = \lfloor (-0.23...)^n \rfloor  = 0\\ 
+\lfloor \log_{10}({(2+\sqrt{5})^n}) \rfloor &\leq log_{10}({4000000\sqrt{5}}) \\
+\lfloor n \log_{10}{(2+\sqrt{5}}) \rfloor &\leq log_{10}({4000000\sqrt{5}}) \\
+\lfloor n \rfloor &\leq \frac{log_{10}({4000000\sqrt{5}})}{\lfloor \log_{10}{(2+\sqrt{5}}) \rfloor} \\
+\end{aligned}
+\end{equation}
+So we have: \\
+\(n = \lfloor \frac{log_{10}({4000000\sqrt{5}})}{\log_{10}{(2+\sqrt{5}})} \rfloor \) \\ \\
+Hence Sum \(S_n\) of even Fibonaci terms from 0 to \(n\) is:
+\begin{equation} \label{eq:a8}
+\begin{aligned}
+ S_n &= a_0 + a_1 + a_2 + a_3 + ... + a_n \\
+ S_n &=  \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^0 + -\frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^0 + ... +  \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^n + -\frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^n \\
+ S_n &=  \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^0 + ...+ \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^n - (\frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^n + ... +\frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^0) \\
+S_n &=  \sum_{k=1}^{n} \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^k - (\sum_{k=1}^{n} \frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^k) \\
+\end{aligned}
+\end{equation} 
+We see that \(\sum_{k=1}^{n} \frac{1}{\sqrt{5}}(\sqrt{5} + 2)^k and (\sum_{k=1}^{n} \frac{1}{\sqrt{5}}(-\sqrt{5} + 2)^k)\) are two \href{http://en.wikipedia.org/wiki/Geometric_series}{Geometric Series} of the form:
+\begin{equation} \label{eq:a9}
+\begin{aligned}
+\sum_{k=1}^{n} cx^k = cx+cx^2+ \cdots + cx^n= c\frac{x-x^{n+1}}{1-x}
+\end{aligned}
+\end{equation} 
+Hence we have:
+\begin{equation} \label{eq:a10}
+\boxed{
+ S_n = \sum_{k=1}^{n}  \frac{1}{\sqrt{5}}(2+\sqrt{5})^n-\frac{1}{\sqrt{5}}(2-\sqrt{5})^n = \displaystyle \cfrac{\cfrac{x-x^{n+1}}{1-x}-\cfrac{y-y^{n+1}}{1-y}}{\sqrt{5}} \\
+}
+\end{equation} 
+with \(x=2+\sqrt{5}, y=2−\sqrt{5}, n = \lfloor log(L\sqrt{5})/log(2+\sqrt{5})\rfloor, L = 4000000\) 
+\end{document}
