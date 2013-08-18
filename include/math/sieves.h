@@ -20,10 +20,11 @@ void sieveEuler(uint64_t n0,uint64_t n1, std::list<uint64_t>* ps, int v) {
     if (sit != eit) {
         eit--;
     }
-    if (v) {printf("Generating all integers in range [%llu to %llu] ...\n", n0, n1);}
+    if (v) {printf("Generating all potential primes in range [%llu to %llu] ...\n", n0, n1);}
     n0 = n0 < 2 ? 2 : n0;
     for (uint64_t i=n0; i<=n1; i++) {
-        ps->push_back(i);
+        // All primes are odd except 2
+        if (i%2 || i == 2) {ps->push_back(i);}
     }
     if (v) {printf("Find prime numbers in range [%llu to %llu] ...\n", n0, n1);}
     
