@@ -1,5 +1,5 @@
 //
-// Run: lang++ -stdlib=libc++ -std=c++98 -pedantic -I`pwd`/../../include  main.cpp; time ./a.out;
+// Run: clang++ -stdlib=libc++ -std=c++98 -pedantic -I`pwd`/../../include  main.cpp; time ./a.out;
 //
 
 #include <cstdint> // uint64_t

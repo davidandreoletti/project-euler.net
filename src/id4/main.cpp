@@ -1,5 +1,5 @@
 //
-// Run: clang++ -stdlib=libc++ -std=c++98 -pedantic main.cpp; time ./a.out;
+// Run: clang++ -stdlib=libc++ -std=c++98 -pedantic -I`pwd`/../../include  main.cpp; time ./a.out;
 //
 
 #include <cstdio> //printf
